@@ -1,4 +1,3 @@
-import { expect } from "@playwright/test"
 import { getOTP } from "../utils/helpers/getOTPHelper.js"
 
 export class SignUpPage {
