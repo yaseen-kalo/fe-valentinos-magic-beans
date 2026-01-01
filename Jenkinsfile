@@ -2,15 +2,12 @@ pipeline {
     agent any
 
     options {
-        ansiColor('xterm')                 // Colored logs
+        ansiColor('xterm')                  // Colored logs
         timeout(time: 60, unit: 'MINUTES') // Max time for the entire pipeline
     }
 
     stages {
         stage('Install & Build') {
-            agent {
-                docker { image 'node:22-bullseye' } // Node environment for build
-            }
             steps {
                 echo 'Installing dependencies...'
                 sh 'npm ci'
@@ -21,9 +18,6 @@ pipeline {
         }
 
         stage('Unit Tests') {
-            agent {
-                docker { image 'node:22-bullseye' }
-            }
             steps {
                 echo 'Running unit tests with Vitest...'
                 sh 'npx vitest run --reporter=verbose'
@@ -31,9 +25,6 @@ pipeline {
         }
 
         stage('E2E Tests') {
-            agent {
-                docker { image 'mcr.microsoft.com/playwright:v1.44.0-focal' } // Playwright-ready
-            }
             steps {
                 echo 'Installing Playwright browsers...'
                 sh 'npx playwright install --with-deps'
@@ -58,9 +49,6 @@ pipeline {
         }
 
         stage('Deploy') {
-            agent {
-                docker { image 'node:22-bullseye' } // Use Node image if deploy scripts need Node
-            }
             steps {
                 echo 'Mock deployment: deploy scripts go here.'
                 // Example: sh 'bash deploy.sh'
