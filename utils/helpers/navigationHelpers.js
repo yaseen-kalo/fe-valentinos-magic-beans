@@ -1,3 +1,5 @@
+import {expect} from "@playwright/test"
+
 // Helper method to navigate to the Shop page, works for both the navbar link 
     // and the "Shop Coffee" button
 export const navigateToShopUsingLocator = async (locator, page, bannerLocator) => {

@@ -1,3 +1,4 @@
+import { expect } from "@playwright/test";
 export class ContactPage {
     constructor(page) {
         this.page = page;

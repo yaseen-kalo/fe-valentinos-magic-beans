@@ -1,3 +1,4 @@
+import { expect } from "@playwright/test";
 import { navigateToShopUsingLocator } from "../utils/helpers/navigationHelpers";
 
 export class Home {

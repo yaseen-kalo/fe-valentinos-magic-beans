@@ -1,3 +1,5 @@
+import { expect } from "@playwright/test";
+
 import { parsePrice } from "../utils/helpers/parsePrice.js";
 
 export class CartPage {

@@ -1,3 +1,5 @@
+import {expect} from "@playwright/test"
+
 import { navigateToShopUsingLocator } from "../../utils/helpers/navigationHelpers.js"
 export class NavigationBar {
     constructor (page) {
