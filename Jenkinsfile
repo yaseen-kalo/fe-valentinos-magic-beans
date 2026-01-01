@@ -2,79 +2,79 @@ pipeline {
     agent any
 
     options {
-        ansiColor('xterm')
-        timeout(time: 60, unit: 'MINUTES')
+        ansiColor('xterm')                  // Colored logs
+        timeout(time: 60, unit: 'MINUTES') // Max time for the pipeline
     }
 
     environment {
-        // Jenkins Secret Text Credentials
-        MAILOSAUR_API_KEY = credentials('MAILOSAUR_API_KEY')
-        MAILOSAUR_SERVER_ID = credentials('MAILOSAUR_SERVER_ID')
-        MAILOSAUR_DOMAIN = credentials('MAILOSAUR_DOMAIN')
+        NODE_HOME = "/opt/homebrew/opt/node@22/bin"
+        PATH = "$NODE_HOME:$PATH"
     }
 
     stages {
-        stage('Checkout') {
+        stage('Install & Build') {
             steps {
-                echo 'Cloning repo...'
-                git branch: 'main', url: 'https://github.com/yaseen-kalo/fe-valentinos-magic-beans.git'
-            }
-        }
+                echo 'Node version:'
+                sh 'node -v'
+                echo 'NPM version:'
+                sh 'npm -v'
 
-        stage('Install Dependencies') {
-            steps {
-                echo 'Installing npm dependencies...'
+                echo 'Installing dependencies...'
                 sh 'npm ci'
+
+                echo 'Building project...'
+                sh 'npm run build'
             }
         }
 
-        stage('Build') {
+        stage('Unit Tests') {
             steps {
-                echo 'Building project (if needed)...'
-                sh 'npm run build || echo "No build step"'
+                echo 'Running unit tests with Vitest...'
+                sh 'npx vitest run --reporter=verbose'
             }
         }
 
-        stage('Run Unit Tests') {
+        stage('E2E Tests') {
             steps {
-                echo 'Running Vitest unit tests...'
-                sh 'npx vitest run --reporter=verbose || true' // don't fail pipeline if unit tests fail
-            }
-        }
-
-        stage('Run E2E Tests') {
-            steps {
-                echo 'Creating .env file for Playwright...'
-                sh """
-                    echo "MAILOSAUR_API_KEY=$MAILOSAUR_API_KEY" > .env
-                    echo "MAILOSAUR_SERVER_ID=$MAILOSAUR_SERVER_ID" >> .env
-                    echo "MAILOSAUR_DOMAIN=$MAILOSAUR_DOMAIN" >> .env
-                """
-
                 echo 'Installing Playwright browsers...'
                 sh 'npx playwright install --with-deps'
 
-                echo 'Running Playwright E2E tests...'
-                sh 'npm test || true'
+                // Inject Mailosaur secrets and create .env file dynamically
+                withCredentials([
+                    string(credentialsId: 'MAILOSAUR_API_KEY', variable: 'MAILOSAUR_API_KEY'),
+                    string(credentialsId: 'MAILOSAUR_SERVER_ID', variable: 'MAILOSAUR_SERVER_ID'),
+                    string(credentialsId: 'MAILOSAUR_DOMAIN', variable: 'MAILOSAUR_DOMAIN')
+                ]) {
+                    echo 'Creating .env file for Playwright tests...'
+                    sh '''
+                        echo "MAILOSAUR_API_KEY=$MAILOSAUR_API_KEY" > .env
+                        echo "MAILOSAUR_SERVER_ID=$MAILOSAUR_SERVER_ID" >> .env
+                        echo "MAILOSAUR_DOMAIN=$MAILOSAUR_DOMAIN" >> .env
+                    '''
+
+                    echo 'Running Playwright E2E tests...'
+                    sh 'npx playwright test --reporter=list'
+                }
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Mock deployment: deploy scripts go here'
+                echo 'Mock deployment: deploy scripts go here.'
+                // Example: sh 'bash deploy.sh'
             }
         }
     }
 
     post {
         always {
-            echo 'Pipeline finished'
+            echo 'Pipeline finished.'
         }
         success {
             echo 'Pipeline succeeded!'
         }
         failure {
-            echo 'Pipeline failed'
+            echo 'Pipeline failed.'
         }
     }
 }
