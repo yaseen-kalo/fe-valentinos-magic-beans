@@ -9,7 +9,7 @@
     "test": "playwright test",
     "test-headed": "playwright test --headed",
     "test-report": "playwright show-report",
-    "test:ci" : "npm run test:ci"
+    "test:ci" : "playwright test"
   },
   "keywords": [],
   "author": "",
