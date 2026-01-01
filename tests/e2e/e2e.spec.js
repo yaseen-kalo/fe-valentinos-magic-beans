@@ -9,7 +9,7 @@ import { NavigationBar } from "../../page-objects/Components/NavigationBar.js"
 import { CartPage } from "../../page-objects/CartPage.js"
 import { SignInPage } from "../../page-objects/SignInPage.js"
 import { CheckoutPage } from "../../page-objects/CheckoutPage.js"
-import { checkoutInfo } from "../../test-data/checkoutData.js"
+import { checkoutInfo } from "../../test-data/checkOutData.js"
 import { OrderConfirmation } from "../../page-objects/OrderConfirmation.js"
 import { ContactPage } from "../../page-objects/ContactPage.js"
 
