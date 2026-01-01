@@ -8,7 +8,8 @@
     "build": "echo 'No build step, placeholder.'",
     "test": "playwright test",
     "test-headed": "playwright test --headed",
-    "test-report": "playwright show-report"
+    "test-report": "playwright show-report",
+    "test:ci" : "npm run test:ci"
   },
   "keywords": [],
   "author": "",
