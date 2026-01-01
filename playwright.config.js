@@ -38,7 +38,8 @@ export default defineConfig({
     },
     viewport: { width: 1280, height: 800 }, // <-- GLOBAL viewport
     /* Base URL to use in actions like `await page.goto('')`. */
-    baseURL: 'https://valentinos-magic-beans.click/',
+    baseURL: 'https://valentinos-magic-beans.click/',,
+    headless: true,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
