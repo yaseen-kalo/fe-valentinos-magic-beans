@@ -7,7 +7,7 @@ export const checkoutInfo = [
     address: {
       firstName: "Valentino",
       lastName: "Bean",
-      email: `sarah.shotts@test.com`,
+      email: `sarah.shotts@${DOMAIN}`,
       address: "123 Magic Bean Lane",
       city: "Beanville",
       postalCode: "12345",
