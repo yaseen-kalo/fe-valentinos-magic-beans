@@ -27,10 +27,5 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Start shopping store application
-        run: |
-          chmod +x ./shopping-store-linux-amd64
-          ./shopping-store-linux-amd64 &
-
       - name: Run Playwright tests
         run: npm run test:ci
