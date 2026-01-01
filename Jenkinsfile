@@ -17,7 +17,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Cloning repo...'
-                git branch: 'main', url: 'https://github.com/yourusername/fe-valentinos-magic-beans.git'
+                git branch: 'main', url: 'https://github.com/yaseen-kalo/fe-valentinos-magic-beans.git'
             }
         }
 
