@@ -1,50 +1,68 @@
 pipeline {
     agent any
-    
+
     options {
-        ansiColor('xterm')
+        ansiColor('xterm')                // Colored logs
+        timeout(time: 60, unit: 'MINUTES') // Max time for the entire pipeline
     }
 
     stages {
-        stage('build') {
+        stage('Install & Build') {
             agent {
-                docker {
-                    image 'node:22-alpine'
-                }
+                docker { image 'node:22-bullseye' } // Node environment for build
             }
             steps {
+                echo 'Installing dependencies...'
                 sh 'npm ci'
+                
+                echo 'Building project...'
                 sh 'npm run build'
             }
         }
 
-        stage('test') {
-            parallel {
-                stage('unit tests') {
-                    agent {
-                        docker {
-                            image 'node:22-alpine'
-                            reuseNode true
-                        }
-                    }
-                    steps {
-                        // Unit tests with Vitest
-                        sh 'npx vitest run --reporter=verbose'
-                    }
-                }
+        stage('Unit Tests') {
+            agent {
+                docker { image 'node:22-bullseye' }
+            }
+            steps {
+                echo 'Running unit tests with Vitest...'
+                sh 'npx vitest run --reporter=verbose'
             }
         }
 
-        stage('deploy') {
+        stage('E2E Tests') {
             agent {
-                docker {
-                    image 'alpine'
-                }
+                docker { image 'mcr.microsoft.com/playwright:v1.44.0-focal' } // Playwright-ready
             }
             steps {
-                // Mock deployment which does nothing
-                echo 'Mock deployment was successful!'
+                echo 'Installing Playwright browsers...'
+                sh 'npx playwright install --with-deps'
+
+                echo 'Running Playwright E2E tests...'
+                sh 'npx playwright test --reporter=list'
             }
+        }
+
+        stage('Deploy') {
+            agent {
+                docker { image 'node:22-bullseye' } // Use Node image if deploy scripts need Node
+            }
+            steps {
+                echo 'Mock deployment: deploy scripts go here.'
+                // Example: sh 'bash deploy.sh'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline finished.'
+        }
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed.'
         }
     }
 }
