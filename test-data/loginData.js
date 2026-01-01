@@ -73,5 +73,10 @@ export const loginData = [
     "email": "steve.shorts.ae4a3be4-850f-4b6f-a47a-cb11c5e00a11@kz0twyqx.mailosaur.net",
     "password": "Password@123",
     "createdAt": "2026-01-01T12:27:32.039Z"
+  },
+  {
+    "email": "steve.shorts.6d5e91b1-fd57-4cf0-b7ea-2d480c4f5103@kz0twyqx.mailosaur.net",
+    "password": "Password@123",
+    "createdAt": "2026-01-01T15:59:21.193Z"
   }
 ];
