@@ -2,7 +2,7 @@ import { test } from "@playwright/test"
 
 import { CartPage } from "../../page-objects/CartPage"
 import { ShopPage } from "../../page-objects/ShopPage.js"
-import { NavigationBar } from "../../page-objects/components/NavigationBar.js"
+import { NavigationBar } from "../../page-objects/Components/NavigationBar.js"
 import { coffeeList } from "../../test-data/coffeeData.js"
 
 let cartPage
