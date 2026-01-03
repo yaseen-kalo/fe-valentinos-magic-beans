@@ -13,7 +13,7 @@ import { defineConfig, devices } from '@playwright/test';
  * @see https://playwright.dev/docs/test-configuration
  */
 export default defineConfig({
-  workers: 1,
+  workers: 4,
   timeout: 90 * 1000,
   expect: {
     timeout: 30 * 1000

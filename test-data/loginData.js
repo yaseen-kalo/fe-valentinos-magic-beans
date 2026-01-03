@@ -48,35 +48,5 @@ export const loginData = [
     "email": "steve.shorts.17547f2c-f5b6-4a0a-80a9-aec97b2f83da@kz0twyqx.mailosaur.net",
     "password": "Password@123",
     "createdAt": "2026-01-01T12:00:27.975Z"
-  },
-  {
-    "email": "steve.shorts.79d73a9d-545c-4a51-a891-f2af8df717bf@kz0twyqx.mailosaur.net",
-    "password": "Password@123",
-    "createdAt": "2026-01-01T12:06:30.524Z"
-  },
-  {
-    "email": "steve.shorts.20b8744c-e7a4-46c8-9049-f8a4d38c86db@kz0twyqx.mailosaur.net",
-    "password": "Password@123",
-    "createdAt": "2026-01-01T12:08:21.005Z"
-  },
-  {
-    "email": "steve.shorts.3231e3a6-af50-4a8d-a6f4-9342660eb5ac@kz0twyqx.mailosaur.net",
-    "password": "Password@123",
-    "createdAt": "2026-01-01T12:12:53.027Z"
-  },
-  {
-    "email": "steve.shorts.dd5439a0-b32e-4ff9-bf99-76e9f13d9d29@kz0twyqx.mailosaur.net",
-    "password": "Password@123",
-    "createdAt": "2026-01-01T12:22:31.144Z"
-  },
-  {
-    "email": "steve.shorts.ae4a3be4-850f-4b6f-a47a-cb11c5e00a11@kz0twyqx.mailosaur.net",
-    "password": "Password@123",
-    "createdAt": "2026-01-01T12:27:32.039Z"
-  },
-  {
-    "email": "steve.shorts.6d5e91b1-fd57-4cf0-b7ea-2d480c4f5103@kz0twyqx.mailosaur.net",
-    "password": "Password@123",
-    "createdAt": "2026-01-01T15:59:21.193Z"
   }
 ];
